@@ -1,0 +1,12 @@
+:root{
+    --base:black;
+    --base2:white;
+    --base3:lightblue;
+    --base4:yellow;
+}
+
+#nav h2{
+    font-family: 'Lobster', cursive;
+    font-size:36px;
+    text-align:center !important;
+}
