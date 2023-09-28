@@ -92,7 +92,7 @@ function forecast (UI) {
             rowC.append(newCol2);
 
             var newDivC = $("<div>").attr("class", "card text-white bg-primary mb-3");
-            newDivC.attr("style", "max-width: 70%;")
+            newDivC.attr("style", "max-width: 90%;","min-height:40%","max-height:50%")
             newCol2.append(newDivC);
 
             var newCB = $("<div>").attr("class", "card-body");
