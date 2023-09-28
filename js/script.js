@@ -1,7 +1,7 @@
-var cResultText = $('#cResult');
-var tResultText = $('#tResult');
-var hResult = $('#hResult');
-var wResultText = $('#windResult')
+// var cResultText = $('#cResult');
+// var tResultText = $('#tResult');
+// var hResult = $('#hResult');
+// var wResultText = $('#windResult')
 var rowC = $("#rowCards")
 var dayForecast = $('#rowday');
 var cDisplay = $('#cardDisplay');
@@ -14,16 +14,18 @@ var forecastH={};
 //Grab Day/Month/Year
 var now = dayjs().format('DD'+'/'+"MM"+"/"+"YYYY")
 
+console.log(now)
+
 var citiesArrayed = JSON.parse(localStorage.getItem("Cities")) || [];
 var APIKey = "&units=metric&APPID=fe9098631abbbf5538dfbc3698e47dd8";
 var url =  "https://api.openweathermap.org/data/2.5/weather?q=";
 
-$(document).ready(function() {
-    let user = citiesArrayed[citiesArrayed.length -1];
-    currentWeather(user);
-    forecast(user);
-    lastSearch();
-})
+// $(document).ready(function() {
+//     let user = citiesArrayed[citiesArrayed.length -1];
+//     currentWeather(user);
+//     forecast(user);
+//     lastSearch();
+// })
 
 function currentWeather(user){
      var queryURL = url+user+APIKey;
@@ -79,8 +81,8 @@ function forecast (UI) {
         url: forecastURL,
         method: "GET"
     }).then(function(response){
+        console.log("hello")
         for (var i = 0; i < response.list.length; i += 8){
-            
             forecastD[i] = response.list[i].dt_txt;
             forecastI[i] = response.list[i].weather[0].icon;
             forecastT[i] = response.list[i].main.temp; 
@@ -90,25 +92,28 @@ function forecast (UI) {
             rowC.append(newCol2);
 
             var newDivC = $("<div>").attr("class", "card text-white bg-primary mb-3");
-            newDivC.attr("style", "max-width: 18rem;")
+            newDivC.attr("style", "max-width: 70%;")
             newCol2.append(newDivC);
 
             var newCB = $("<div>").attr("class", "card-body");
             newDivC.append(newCB);
-
-            var newH5 = $("<h5>").attr("class", "card-title").text(now(forecastD[i]).format("MMM DD"));
+            var example =  dayjs(forecastD[i]).format('DD'+'/'+"MM"+"/"+"YYYY")
+            
+            var newH5 = $("<h5>").attr("class", "card-title").text(example);
             newCB.append(newH5);
 
-            var newImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + forecastI[i] + "@2x.png");
-            newCardBody.append(newImg);
-
+            var newImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + forecastI[i] + ".png");
+            newCB.append(newImg);
+            console.log(newImg)
             var newPTemp = $("<p>").attr("class", "card-text").text("Temp: " + Math.floor(forecastT[i]) + "ºC");
-            newCardBody.append(newPTemp);
+            newCB.append(newPTemp);
 
             var newPHum = $("<p>").attr("class", "card-text").text("Humidity: " + forecastH[i] + " %");
-            newCardBody.append(newPHum);
+            newCB.append(newPHum);
+            console.log(newCB)
 
             dayForecast.append(fore5);
+            // console.log(this)
             };
             })
 

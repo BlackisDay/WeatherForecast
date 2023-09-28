@@ -10,3 +10,28 @@
     font-size:36px;
     text-align:center !important;
 }
+
+.col-2{
+    flex-direction:row;
+    max-width:70%;
+}
+
+#weathers {
+    box-sizing:content-box;
+    display:inline-block;
+    border-radius:100px
+}
+
+#row5day {
+    display:flex;
+    flex-direction:row;
+    margin:10px;
+}
+
+img.card-img-top{
+    z-index:1 !important;
+}
+
+.card-body{
+    z-index:1 !important;
+}
