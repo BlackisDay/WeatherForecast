@@ -1,7 +1,7 @@
-// var cResultText = $('#cResult');
-// var tResultText = $('#tResult');
-// var hResult = $('#hResult');
-// var wResultText = $('#windResult')
+var cResultText = $('#cResult');
+var tResultText = $('#tResult');
+var hResult = $('#hResult');
+var wResultText = $('#windResult')
 var rowC = $("#rowCards")
 var dayForecast = $('#rowday');
 var cDisplay = $('#cardDisplay');
@@ -81,11 +81,11 @@ function forecast (UI) {
         url: forecastURL,
         method: "GET"
     }).then(function(response){
-        console.log("hello")
+        console.log(response.list)
         for (var i = 0; i < response.list.length; i += 8){
             forecastD[i] = response.list[i].dt_txt;
-            forecastI[i] = response.list[i].weather[0].icon;
-            forecastT[i] = response.list[i].main.temp; 
+            forecastI[i] = response.list[i].weather[0].icon; //do NOT change weather[0] to anything else or it will not work.
+            forecastT[i] = response.list[i].main.temp; //Grabs main temperature  
             forecastH[i] = response.list[i].main.humidity;  
 
             var newCol2 = $("<div>").attr("class", "col-2");
@@ -124,11 +124,13 @@ function storeData (UI) {
     var containsCity = false;
 
     if (citiesArrayed != null) {
-
+        console.log(citiesArrayed)
 		$(citiesArrayed).each(function(x) {
 			if (citiesArrayed[x] === UI) {
+                console.log("hi") //Reaches console now
 				containsCity = true;
 			}
+            console.log(citiesArrayed)
 		});
 	}
 
@@ -142,19 +144,23 @@ function storeData (UI) {
 
 function lastSearch () {
     buttonL.empty();
-    for (var i = 0; i < citiesArrayed.length; i ++) {
-        var newButton = $("<button>").attr("type", "button").attr("class","savedBtn btn btn-secondary btn-lg btn-block");
+    for (var i = 0; i < citiesArrayed.length; i++) {
+        localStorage.getItem("Saved City",JSON.stringify(citiesArrayed))
+        var newButton = $("<button>").attr("type", "button").attr("class","test");
         newButton.attr("data-name", citiesArrayed[i])
         newButton.text(citiesArrayed[i]);
         buttonL.prepend(newButton);
+        console.log(newButton)
+
     }
     $(".savedBtn").on("click", function(event){
         event.preventDefault();
         var UI = $(this).data("name");
         currentWeather(UI);
         forecast(UI);
+        console.log(this)
     })
-
+    console.log(this)
 }
 
 $(".btn").on("click", function (event){

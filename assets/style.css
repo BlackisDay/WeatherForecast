@@ -9,6 +9,8 @@
     font-family: 'Lobster', cursive;
     font-size:36px;
     text-align:center !important;
+    text-indent:35rem;
+    text-shadow:4px 5px 5px rgba(255, 8, 8, 1);
 }
 
 .col-2{
@@ -35,3 +37,8 @@ img.card-img-top{
 .card-body{
     z-index:1 !important;
 }
+
+.bg-primary{
+    background-color: grey!important;
+}
+
