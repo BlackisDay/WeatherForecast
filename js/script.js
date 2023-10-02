@@ -6,7 +6,7 @@ var rowC = $("#rowCards")
 var dayForecast = $('#rowday');
 var cDisplay = $('#cardDisplay');
 var UVIR=$('#UVIndexResult')
-var buttonL=$('#ButtonsLista');
+var buttonL=$('#buttonsList');
 var forecastD={};
 var forecastI ={};
 var forecastT={};
@@ -145,17 +145,19 @@ function storeData (UI) {
 function lastSearch () {
     buttonL.empty();
     for (var i = 0; i < citiesArrayed.length; i++) {
-        localStorage.getItem("Saved City",JSON.stringify(citiesArrayed))
-        var newButton = $("<button>").attr("type", "button").attr("class","test");
-        newButton.attr("data-name", citiesArrayed[i])
-        newButton.text(citiesArrayed[i]);
-        buttonL.prepend(newButton);
-        console.log(newButton)
+         localStorage.getItem("Saved City",JSON.stringify(citiesArrayed))
+         var newButton = $("<button>").attr("type", "button").attr("class","buttonL  ");
+         newButton.attr("data-name", citiesArrayed[i])
+         newButton.text(citiesArrayed[i]);
+         buttonL.prepend(newButton);
+         console.log(newButton)
 
     }
     $(".savedBtn").on("click", function(event){
         event.preventDefault();
         var UI = $(this).data("name");
+        lastSearch()
+        console.log(lastSearch())
         currentWeather(UI);
         forecast(UI);
         console.log(this)
